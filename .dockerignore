@@ -1,0 +1,11 @@
+**/node_modules
+**/.venv
+**/__pycache__
+**/.pytest_cache
+frontend/dist
+backend/data
+**/*.db
+**/.env
+.git
+.DS_Store
+ASK-WHY_Build_Report.pdf

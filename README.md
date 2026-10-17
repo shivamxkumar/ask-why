@@ -35,6 +35,19 @@ cd backend && python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 cd frontend && npm install && npx vite --port 5174
 ```
 
+## Deploy
+
+The `Dockerfile` builds one container: FastAPI serves the API **and** the built frontend on the same URL (port `$PORT`, default 8000).
+
+```bash
+docker build -t ask-why . && docker run -p 8000:8000 ask-why        # then open http://localhost:8000
+```
+
+- **Railway:** `npx @railway/cli login`, then `npx @railway/cli init --name ask-why`, `npx @railway/cli up`, and `npx @railway/cli domain`.
+- **Render:** New → Blueprint → select this repo (`render.yaml`, free plan, Docker).
+- Optional: set `ANTHROPIC_API_KEY` as a service variable to enable AI analysis.
+- Storage is SQLite inside the container. On free tiers it resets on redeploy, and the sample investigation is rebuilt automatically.
+
 ## Demo script (≈3 minutes)
 
 1. **Landing** → *Try sample investigation* (synthetic "Project Meridian": brief `.md`, delivery plan `.pdf`, pilot data `.csv`, finance `.xlsx`, onboarding workflow `.txt`).

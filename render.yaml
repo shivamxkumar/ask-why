@@ -1,0 +1,13 @@
+# Render Blueprint: New → Blueprint → pick this repo. Free plan, Docker runtime.
+services:
+  - type: web
+    name: ask-why
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false   # optional — set in the Render dashboard to enable AI analysis
+      - key: ASKWHY_MODEL
+        value: claude-opus-5-5

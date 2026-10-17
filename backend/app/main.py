@@ -2,13 +2,16 @@
 from __future__ import annotations
 
 import logging
+import os
 import threading
 import uuid
+from pathlib import Path
 from typing import Optional
 
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, PlainTextResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 
 from app import db
 from app.analysis import ai
@@ -224,3 +227,21 @@ def download_sample_file(name: str):
 async def _unhandled(_, exc: Exception):  # pragma: no cover - last resort, keeps JSON errors
     log.exception("unhandled error")
     return JSONResponse(status_code=500, content={"detail": f"Internal error: {type(exc).__name__}"})
+
+
+# ---------------------------------------------------------------- built frontend (single-service deploys)
+# When frontend/dist exists (Docker image, or after `npm run build`), serve it from the same origin as the API.
+STATIC_DIR = Path(os.environ.get("ASKWHY_STATIC") or Path(__file__).resolve().parents[2] / "frontend" / "dist").resolve()
+
+if (STATIC_DIR / "index.html").is_file():
+    if (STATIC_DIR / "assets").is_dir():
+        app.mount("/assets", StaticFiles(directory=STATIC_DIR / "assets"), name="assets")
+
+    @app.get("/{path:path}", include_in_schema=False)
+    def spa(path: str):
+        if path.startswith("api/") or path == "api":
+            raise HTTPException(404, "Not found.")
+        target = (STATIC_DIR / path).resolve()
+        if path and target.is_file() and STATIC_DIR in target.parents:
+            return FileResponse(target)
+        return FileResponse(STATIC_DIR / "index.html")  # client-side routes (hash routing) all land on the app
