@@ -1,0 +1,278 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0b0f14;
+  --color-canvas: #10151c;
+  --color-panel: #151b24;
+  --color-raised: #1a212c;
+  --color-line: #29344a;
+  --color-line-soft: #1c2430;
+  --color-fg: #e8e4da;
+  --color-fg-dim: #b7b2a6;
+  --color-muted: #98a1af;
+  --color-faint: #6e7989;
+  --color-paper: #f5f2eb;
+  --color-paper-2: #ebe6da;
+  --color-paper-line: #d8d1c2;
+  --color-paper-ink: #1d1b16;
+  --color-paper-muted: #6b665b;
+  --color-amber: #f5a623;
+  --color-amber-soft: #f5a62326;
+  --color-amber-deep: #b97a12;
+  --color-alert: #d9574a;
+  --color-alert-soft: #d9574a22;
+  --color-ok: #7fae8a;
+  --color-ok-soft: #7fae8a22;
+  --color-cool: #7fa3c4;
+  --color-gold: #c9a05a;
+  --color-on-amber: #10151c;
+  --color-amber-hover: #ffb840;
+
+  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --font-sans: "Inter Tight", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+/* Light theme (default; toggled via data-theme on <html>). Paper surfaces stay warm off-white in both themes. */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --color-ink: #e9e5dc;
+  --color-canvas: #f3f0e9;
+  --color-panel: #fbf9f4;
+  --color-raised: #ffffff;
+  --color-line: #d8d2c6;
+  --color-line-soft: #e7e2d8;
+  --color-fg: #1b1f27;
+  --color-fg-dim: #3b424e;
+  --color-muted: #5c6470;
+  --color-faint: #848b96;
+  --color-paper: #fffdf8;
+  --color-paper-2: #f6f2e8;
+  --color-paper-line: #e0d9ca;
+  --color-amber: #c07a0a;
+  --color-amber-soft: #c07a0a1c;
+  --color-amber-deep: #955e07;
+  --color-alert: #bf3b2d;
+  --color-alert-soft: #bf3b2d16;
+  --color-ok: #3c7a50;
+  --color-ok-soft: #3c7a5016;
+  --color-cool: #376893;
+  --color-gold: #9c7428;
+  --color-on-amber: #ffffff;
+  --color-amber-hover: #a96a07;
+}
+:root[data-theme="light"] .paper {
+  box-shadow: 0 0 0 1px var(--color-paper-line), 0 18px 40px -28px rgba(60, 50, 30, 0.35) !important;
+}
+:root[data-theme="light"] ::selection {
+  color: #fff;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  transition: background-color 200ms ease, color 200ms ease;
+  background: var(--color-canvas);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-amber);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-amber);
+  outline-offset: 2px;
+}
+
+.display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  letter-spacing: -0.015em;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-feature-settings: "zero" 1;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+.rule {
+  border-color: var(--color-line);
+}
+
+/* scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line) transparent;
+}
+
+/* paper document surface */
+.paper {
+  background: var(--color-paper);
+  color: var(--color-paper-ink);
+  background-image: linear-gradient(transparent 0, transparent calc(100% - 1px), #0000 100%);
+}
+
+.paper ::selection {
+  background: #f5a62366;
+  color: inherit;
+}
+
+mark.evidence {
+  background-color: transparent;
+  background-image: linear-gradient(transparent 8%, #f5a62355 8%, #f5a62355 88%, #d48b0f 88%, #d48b0f 96%, transparent 96%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  color: inherit;
+  padding: 0 1px;
+}
+
+.hatch {
+  background-image: repeating-linear-gradient(-45deg, transparent 0 6px, color-mix(in srgb, var(--color-fg) 5%, transparent) 6px 7px);
+}
+
+/* evidence-view entrance (the signature transition) */
+@keyframes case-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes sweep {
+  from {
+    background-size: 0% 100%;
+  }
+  to {
+    background-size: 100% 100%;
+  }
+}
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 #f5a62366;
+  }
+  100% {
+    box-shadow: 0 0 0 14px #f5a62300;
+  }
+}
+.case-in {
+  animation: case-in 420ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.case-in-2 {
+  animation: case-in 420ms 120ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.case-in-3 {
+  animation: case-in 420ms 240ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.sweep mark.evidence {
+  animation: sweep 700ms 350ms cubic-bezier(0.3, 0.6, 0.2, 1) both;
+}
+.pulse {
+  animation: pulse-ring 1.4s ease-out 2;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* React Flow theming */
+.react-flow {
+  --xy-background-color: transparent;
+  --xy-edge-stroke: var(--color-line);
+  --xy-controls-button-background-color: var(--color-panel);
+  --xy-controls-button-background-color-hover: var(--color-raised);
+  --xy-controls-button-color: var(--color-fg-dim);
+  --xy-controls-button-border-color: var(--color-line);
+  --xy-minimap-background-color: var(--color-ink);
+}
+.react-flow__attribution {
+  background: transparent !important;
+}
+.react-flow__attribution a {
+  color: var(--color-faint) !important;
+}
+.react-flow__node {
+  transition: opacity 280ms ease;
+}
+.react-flow__edge-path {
+  transition: opacity 280ms ease, stroke 280ms ease;
+}
+
+input[type="range"] {
+  accent-color: var(--color-amber);
+}
+
+/* print report */
+@media print {
+  @page {
+    margin: 16mm 14mm;
+  }
+  body {
+    background: #fff !important;
+    color: #111 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-root {
+    position: static !important;
+    overflow: visible !important;
+    height: auto !important;
+    background: #fff !important;
+  }
+  .print-sheet {
+    box-shadow: none !important;
+    max-width: none !important;
+    padding: 0 !important;
+    background: #fff !important;
+  }
+  .print-avoid {
+    break-inside: avoid;
+  }
+}

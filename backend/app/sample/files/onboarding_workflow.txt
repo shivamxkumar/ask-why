@@ -1,0 +1,15 @@
+MERIDIAN CUSTOMER ONBOARDING WORKFLOW v0.3
+SYNTHETIC SAMPLE DOCUMENT created for the ASK//WHY demonstration. All details are fictional.
+
+Purpose: describe how a new paying account goes from signed contract to first dispatched job.
+
+Step 1. Sales marks the account as closed-won in the CRM.
+Step 2. Customer success schedules a 60-minute onboarding call within 48 hours of signup.
+Step 3. Before the call, a customer success manager spends 30 minutes importing the customer's technician list and service areas.
+Step 4. During the call, the customer success manager configures routing preferences and sends a test SMS reminder.
+Step 5. The account is marked live once the first job is dispatched through Meridian.
+
+Ownership: every step after Step 1 is owned by the customer success team.
+Service level: onboarding calls must happen within 48 hours of signup for every new account.
+Escalation: if an onboarding call is missed, the account owner is notified by email.
+Each customer success manager works 140 productive hours per month, shared between onboarding and support tickets.
