@@ -4,6 +4,10 @@
 
 ASK//WHY investigates project documents, datasets and workflow descriptions. It surfaces hidden assumptions, cross-source contradictions, missing constraints, dependencies with no fallback, dataset-quality problems and high-impact unanswered questions. Every finding is ranked by a transparent impact × confidence score and backed by excerpts that have been **verified against the extracted source text**.
 
+## Demo video
+
+▶ **[ASK-WHY_Demo.mp4](ASK-WHY_Demo.mp4)** — 3-minute narrated walkthrough of every feature (1080p, captions + voiceover). Script: [VOICEOVER_SCRIPT.md](VOICEOVER_SCRIPT.md) · Build report: [ASK-WHY_Build_Report.pdf](ASK-WHY_Build_Report.pdf)
+
 ## Quick start
 
 ```bash
